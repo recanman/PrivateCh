@@ -1,9 +1,11 @@
 body {
     background-color: #eef2ff;
+    font-size: 10pt;
 }
 
 .thread {
     display: table;
+    margin-left: 4px;
 }
 
 .reply {
@@ -11,10 +13,27 @@ body {
     display: table;
     padding: 2px;
     margin-left: 50px;
+    padding-left: 4px;
     margin-bottom: 4px;
     min-width: 500px;
 }
 
+.reply:target {
+    background-color: #d6bad0;
+    border: 1px solid #ba9dbf;
+}
+
 .quote {
     color: #789922;
+}
+
+.quotelink {
+    color: navy;
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+.post-header .quotelink {
+    font-size: 11px;
+    margin-left: 4px;
 }

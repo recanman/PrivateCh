@@ -1,4 +1,6 @@
 // made by recanman
+const MATCH_REPLIES_REGEX=new RegExp(/(?<=&gt;&gt;)\d+/gm)
+
 const TTLCache = require("@isaacs/ttlcache")
 const cache = new TTLCache({max: 100, ttl: 15 * 1000})
 
@@ -36,6 +38,36 @@ const SortThreads = threads => {
     }
 
     return threads
+}
+
+const OrganizeRepliesForThread = posts => {
+    let replies = {}
+    let thread = posts
+
+    for (const post of posts) {
+        const matchedReplies = MATCH_REPLIES_REGEX.exec(post.com)
+        if (!matchedReplies) {continue}
+
+        if (!replies[matchedReplies[0]]) {
+            replies[matchedReplies[0]] = []
+        }
+
+        replies[matchedReplies[0]].push(post.no)
+    }
+
+    let index = 0
+    for (const postReply of thread) {
+        const postReplies = replies[postReply.no]
+        if (!postReplies) {
+            index += 1
+            continue
+        }
+
+        thread[index].replies = postReplies
+        index += 1
+    }
+
+    return thread
 }
 
 const GetThreadsForBoard = async (board_code, page = 1) => {
@@ -80,7 +112,7 @@ const GetThreadForBoard = async (board_code, thread_id) => {
             if (result.status == 404) {return reject()}
 
             result.json().then(json => {
-                const thread = SortByTimestamp(json.posts, "time", true)
+                const thread = OrganizeRepliesForThread(SortByTimestamp(json.posts, "time", true))
                 cache.set(cacheKey, thread)
 
                 resolve(thread)
