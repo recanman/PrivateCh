@@ -11,6 +11,7 @@ body {
     display: table;
     padding: 2px;
     margin-left: 50px;
+    margin-bottom: 4px;
     min-width: 500px;
 }
 
