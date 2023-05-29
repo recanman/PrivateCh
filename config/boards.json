@@ -1,0 +1,265 @@
+{
+    "Japanese Culture": {
+      "nsfw": false,
+      "boards": [
+        {
+          "code": "a"
+        },
+        {
+          "code": "c"
+        },
+        {
+          "code": "w"
+        },
+        {
+          "code": "m"
+        },
+        {
+          "code": "cgl"
+        },
+        {
+          "code": "cm"
+        },
+        {
+          "code": "f"
+        },
+        {
+          "code": "n"
+        },
+        {
+          "code": "jp"
+        },
+        {
+          "code": "vt"
+        }
+      ]
+    },
+    "Video Games": {
+      "nsfw": false,
+      "boards": [
+        {
+          "code": "v"
+        },
+        {
+          "code": "vg"
+        },
+        {
+          "code": "vm"
+        },
+        {
+          "code": "vmg"
+        },
+        {
+          "code": "vp"
+        },
+        {
+          "code": "vr"
+        },
+        {
+          "code": "vrpg"
+        },
+        {
+          "code": "vst"
+        }
+      ]
+    },
+    "Interests": {
+      "nsfw": false,
+      "boards": [
+        {
+          "code": "co"
+        },
+        {
+          "code": "g"
+        },
+        {
+          "code": "tv"
+        },
+        {
+          "code": "k"
+        },
+        {
+          "code": "o"
+        },
+        {
+          "code": "an"
+        },
+        {
+          "code": "tg"
+        },
+        {
+          "code": "sp"
+        },
+        {
+          "code": "xs"
+        },
+        {
+          "code": "pw"
+        },
+        {
+          "code": "sci"
+        },
+        {
+          "code": "his"
+        },
+        {
+          "code": "int"
+        },
+        {
+          "code": "out"
+        },
+        {
+          "code": "toy"
+        }
+      ]
+    },
+    "Creative": {
+      "nsfw": false,
+      "boards": [
+        {
+          "code": "i"
+        },
+        {
+          "code": "po"
+        },
+        {
+          "code": "p"
+        },
+        {
+          "code": "ck"
+        },
+        {
+          "code": "ic"
+        },
+        {
+          "code": "wg"
+        },
+        {
+          "code": "lit"
+        },
+        {
+          "code": "mu"
+        },
+        {
+          "code": "fa"
+        },
+        {
+          "code": "3"
+        },
+        {
+          "code": "gd"
+        },
+        {
+          "code": "diy"
+        },
+        {
+          "code": "wsg"
+        },
+        {
+          "code": "qst"
+        }
+      ]
+    },
+    "Other": {
+      "nsfw": false,
+      "boards": [
+        {
+          "code": "biz"
+        },
+        {
+          "code": "trv"
+        },
+        {
+          "code": "fit"
+        },
+        {
+          "code": "x"
+        },
+        {
+          "code": "adv"
+        },
+        {
+          "code": "lgbt"
+        },
+        {
+          "code": "mlp"
+        },
+        {
+          "code": "news"
+        },
+        {
+          "code": "wsr"
+        },
+        {
+          "code": "vip"
+        }
+      ]
+    },
+    "Misc.": {
+      "nsfw": true,
+      "boards": [
+        {
+          "code": "b"
+        },
+        {
+          "code": "r9k"
+        },
+        {
+          "code": "pol"
+        },
+        {
+          "code": "bant"
+        },
+        {
+          "code": "soc"
+        },
+        {
+          "code": "s4s"
+        }
+      ]
+    },
+    "Adult": {
+      "nsfw": true,
+      "boards": [
+        {
+          "code": "s"
+        },
+        {
+          "code": "hc"
+        },
+        {
+          "code": "hm"
+        },
+        {
+          "code": "h"
+        },
+        {
+          "code": "e"
+        },
+        {
+          "code": "u"
+        },
+        {
+          "code": "d"
+        },
+        {
+          "code": "y"
+        },
+        {
+          "code": "t"
+        },
+        {
+          "code": "hr"
+        },
+        {
+          "code": "gif"
+        },
+        {
+          "code": "aco"
+        },
+        {
+          "code": "r"
+        }
+      ]
+    }
+  }

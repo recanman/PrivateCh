@@ -1,0 +1,31 @@
+{% set title = "Home" %}
+{% extends "core/layout.njk" %}
+
+{% block body %}
+{{ super() }}
+
+<div>
+    <b>Boards</b>
+
+    <ul>
+        {% for categoryName, category in boards %}
+            <li>
+                <u>{{ categoryName }}</u>
+                
+                {% if category.nsfw %}
+                    (<b style="color:red">NSFW</b>)
+                {% endif %}
+                
+            </li>
+
+            <ul>
+                {% for board in category %}
+                    <a href="/{{ board.board }}/">{{ board.title }}</a>
+                    <br>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

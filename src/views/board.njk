@@ -1,0 +1,18 @@
+{% set title = ["/", board.board, "/"] | join %}
+{% extends "core/layout.njk" %}
+
+{% block body %}
+{{ super() }}
+
+<h1>/{{ board.board }}/ - {{ board.title }}</h1>
+
+<div>
+    {% for thread in threads %}
+        <div class="thread">
+            {% if thread.sub %}<b>{{ thread.sub }}</b>&nbsp;{% endif %}<b style="color:green">{{ thread.name }}</b>&nbsp;<span>{{ thread.time | formatDate }}</span>
+            <p>{{ thread.com }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- made by recanman -->
+<html lang="en">
+    <head>
+        <title>{{ title }} | {{ site.APP_NAME }}</title>
+        <link rel="stylesheet" href="/css/style.css">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="/style.css" />
+
+        {% block includes %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <div id="alerts"></div>
+
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
