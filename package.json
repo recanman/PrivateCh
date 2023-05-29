@@ -1,11 +1,10 @@
 {
-  "name": "4chanalternatefrontend",
-  "version": "1.0.0",
-  "description": "",
+  "name": "privacychan",
+  "version": "0.1.0-pre-release",
+  "description": "No-JavaScript privacy-friendly alternate frontend for the 4chan imageboard.",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "test": "mocha"
+    "start": "node src/index.js"
   },
   "author": "recanman",
   "license": "GPLv3",
