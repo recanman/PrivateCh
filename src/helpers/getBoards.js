@@ -6,8 +6,8 @@ let boardCodes = {}
 let boardList = {}
 
 Object.keys(boardCategories).forEach(category => {
-    boardCategories[category].boards.forEach(board => {
-        boardCodes[board.code] = category
+    boardCategories[category].forEach(board => {
+        boardCodes[board] = category
     })
 })
 
