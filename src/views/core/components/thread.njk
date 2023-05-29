@@ -1,7 +1,7 @@
 {% macro reply(reply) %}
     <div class="reply">
         {% if reply.filename %}
-            <img src="/img/{{ board.board }}/{{ reply.tim }}s{{ reply.ext }}" />
+            <img src="/img/{{ board.board }}/{{ reply.tim }}{{ reply.ext }}" height="250px" />
         {% endif %}
 
         {% if reply.sub %}<b>{{ reply.sub }}</b>&nbsp;{% endif %}<b style="color:green">{{ reply.name }}</b>&nbsp;<span>{{ reply.time | formatDate }}</span>&nbsp;<span>No. {{ reply.no }}</span>
