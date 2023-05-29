@@ -75,6 +75,8 @@ You can read more here: (todo)-->
 
 ## Contribute
 
+See [CONTRIBUTING.md](./CONTRIUBTING.md).
+
 ### Code
 
 1.  Fork it ( https://github.com/recanman/privacychan/fork ).
