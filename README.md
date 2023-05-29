@@ -31,7 +31,7 @@
 
 ## Screenshots
 
-| Homepage                            | Boards                              | Thread                                |
+| Homepage                            | Boards                              | Threads                               |
 |-------------------------------------|-------------------------------------|---------------------------------------|
 | ![](screenshots/01-homepage.png)    | ![](screenshots/03-boards.png)      | ![](screenshots/05-thread.png)        |
 | ![](screenshots/02-homepage.png)    | ![](screenshots/04-boards.png)      | ![](screenshots/06-thread.png)        |
