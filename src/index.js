@@ -16,7 +16,6 @@ if (process.env.TRUST_PROXY) {
 }
 
 app.use(express.static(join(__dirname, "views/assets")))
-app.use("/img", express.static(join(__dirname, "../assets/public")))
 app.set("view engine", "njk")
 
 app.use((req, res, next) => {
@@ -43,10 +42,6 @@ nunjucksEnv.addFilter("formatDate", date => {
 
 nunjucksEnv.addFilter("split", (string, separator) => {
     return string[0].split(separator)
-})
-
-nunjucksEnv.addFilter("test123", (string) => {
-    return JSON.stringify(string)
 })
 
 app.use(express.json())

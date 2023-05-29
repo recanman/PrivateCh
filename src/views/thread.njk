@@ -1,0 +1,20 @@
+{% set title = ["/", board.board, "/"] | join %}
+{% extends "core/layout.njk" %}
+{% from "core/components/thread.njk" import thread, reply with context %}
+
+{% block body %}
+{{ super() }}
+
+<h1>/{{ board.board }}/ - {{ board.title }}</h1>
+
+<div>
+    {% for replyInfo in posts %}
+        {% if loop.index0 == 0 %}
+            {{ thread(replyInfo, false) }}
+        {% else %}
+            {{ reply(replyInfo) }}
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}

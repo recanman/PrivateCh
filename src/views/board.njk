@@ -1,5 +1,6 @@
 {% set title = ["/", board.board, "/"] | join %}
 {% extends "core/layout.njk" %}
+{% from "core/components/thread.njk" import thread with context %}
 
 {% block body %}
 {{ super() }}
@@ -7,12 +8,19 @@
 <h1>/{{ board.board }}/ - {{ board.title }}</h1>
 
 <div>
-    {% for thread in threads %}
-        <div class="thread">
-            {% if thread.sub %}<b>{{ thread.sub }}</b>&nbsp;{% endif %}<b style="color:green">{{ thread.name }}</b>&nbsp;<span>{{ thread.time | formatDate }}</span>
-            <p>{{ thread.com }}</p>
-        </div>
+    {% for threadInfo in threads %}
+        {{ thread(threadInfo) }}
     {% endfor %}
+</div>
+
+<div class="pages">
+    {% for page in range(1, board.pages + 1) %}
+        {% if page == current_page %}
+            <span>[<b>{{ page }}</b>]</span>
+        {% else %}
+            <span>[<a href="/{{ board.board }}/{{ page }}">{{ page }}</a>]</span>
+        {% endif %}
+    {%- endfor %}
 </div>
 
 {% endblock %}

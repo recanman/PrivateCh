@@ -1,0 +1,29 @@
+{% macro reply(reply) %}
+    <div class="reply">
+        {% if reply.filename %}
+            <img src="/img/{{ board.board }}/{{ reply.tim }}s{{ reply.ext }}" />
+        {% endif %}
+
+        {% if reply.sub %}<b>{{ reply.sub }}</b>&nbsp;{% endif %}<b style="color:green">{{ reply.name }}</b>&nbsp;<span>{{ reply.time | formatDate }}</span>&nbsp;<span>No. {{ reply.no }}</span>
+        <p>{{ reply.com }}</p>
+    </div>
+{% endmacro %}
+
+{% macro thread(thread, showLink=true) %}
+    <div class="thread">
+        {% if thread.filename %}
+            <img src="/img/{{ board.board }}/{{ thread.tim }}{{ thread.ext }}" height="250px" />
+        {% endif %}
+
+        {% if thread.sub %}<b>{{ thread.sub }}</b>&nbsp;{% endif %}<b style="color:green">{{ thread.name }}</b>&nbsp;<span>{{ thread.time | formatDate }}</span>&nbsp;<span>No. {{ thread.no }}</span>
+        <p>{{ thread.com }}</p>
+
+        {% if showLink == true %}
+            <a href="/{{ board.board }}/thread/{{ thread.no }}">Click to view</a>
+        {% endif %}
+
+        {% for last_reply in thread.last_replies %}
+            {{ reply(last_reply) }}
+        {% endfor %}
+    </div>
+{% endmacro %}

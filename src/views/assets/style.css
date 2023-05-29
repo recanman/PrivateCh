@@ -1,3 +1,19 @@
+body {
+    background-color: #eef2ff;
+}
+
 .thread {
+    display: table;
+}
+
+.reply {
     background-color: #d6daf0;
+    display: table;
+    padding: 2px;
+    margin-left: 50px;
+    min-width: 500px;
+}
+
+.quote {
+    color: #789922;
 }
