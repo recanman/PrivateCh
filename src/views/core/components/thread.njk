@@ -1,7 +1,8 @@
 {% macro media(post) %}
+    <input type="checkbox" class="toggle-checkbox" id="media-{{ post.tim }}" />
+    <label for="media-{{ post.tim }}" class="toggle-label">
+
     {% if post.ext == ".webm" %}
-        <input type="checkbox" class="toggle-checkbox" id="media-{{ post.tim }}" />
-        <label for="media-{{ post.tim }}" class="toggle-label">
             <img src="/static/{{ board.board }}/{{ post.tim }}s.jpg" height="{{ post.tn_h }}px" width="{{ post.tn_w }}px" />
         </label>
 
@@ -9,7 +10,12 @@
             <video src="/static/{{ board.board }}/{{ post.tim }}{{ post.ext }}" style="width: {{ post.w }}px; height: {{ post.h }}px;" controls loop preload="none" loading="lazy">
         </div>
     {% else %}
-        <img src="/static/{{ board.board }}/{{ post.tim }}{{ post.ext }}" height="{{ post.tn_h }}" width="{{ post.tn_w }}" />
+            <img src="/static/{{ board.board }}/{{ post.tim }}{{ post.ext }}" height="{{ post.tn_h }}" width="{{ post.tn_w }}" />
+        </label>
+
+        <div class="toggle-container">
+            <img src="/static/{{ board.board }}/{{ post.tim }}{{ post.ext }}" height="{{ post.h }}" width="{{ post.w }}" />
+        </div>
     {% endif %}
 {% endmacro %}
 
