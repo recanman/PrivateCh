@@ -14,7 +14,7 @@ router.get("/:board_code/:file_name", CheckBoard, async (req, res, next) => {
     StaticAssetsController.GetStaticAsset(res, `${process.env.CDN_BASE_URL}${board_code}/${file_name}`).catch(err => next(err))
 })
 
-router.get("/asset/:asset_type/:file_name", async (req, res, next) => {
+router.get("/asset/:asset_type/:file_name(*)", async (req, res, next) => {
     const {file_name, asset_type} = req.params
     StaticAssetsController.GetStaticAsset(res, `${process.env.STATIC_CDN_BASE_URL}${asset_type}/${file_name}`).catch(err => next(err))
 })
