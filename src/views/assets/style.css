@@ -16,6 +16,7 @@ body {
     padding-left: 4px;
     margin-bottom: 4px;
     min-width: 500px;
+    border: 1px solid #b7c5d9;
 }
 
 .reply:target {
