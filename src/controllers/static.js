@@ -1,7 +1,7 @@
 // made by recanman
-const GetImage = async (res, board_code, file_name) => {
+const GetStaticAsset = async (res, url) => {
     return new Promise((resolve, reject) => {
-        fetch(`${process.env.CDN_BASE_URL}${board_code}/${file_name}`).then(data => {
+        fetch(url).then(data => {
 			data.body.pipeTo(
 				new WritableStream({
 					start() {
@@ -21,5 +21,5 @@ const GetImage = async (res, board_code, file_name) => {
 }
 
 module.exports = {
-    GetImage
+	GetStaticAsset
 }

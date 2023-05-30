@@ -2,14 +2,14 @@
     {% if ext == ".webm" %}
         <input type="checkbox" class="toggle-checkbox" id="media-{{ tim }}" />
         <label for="media-{{ tim }}" class="toggle-label">
-            <img src="/img/{{ board.board }}/{{ tim }}s.jpg" height="125px" />
+            <img src="/static/{{ board.board }}/{{ tim }}s.jpg" height="125px" />
         </label>
 
         <div class="toggle-container">
-            <video src="/img/{{ board.board }}/{{ tim }}{{ ext }}" style="width: 1088px; height: 544px;" controls loop preload="none" loading="lazy">
+            <video src="/static/{{ board.board }}/{{ tim }}{{ ext }}" style="width: 1088px; height: 544px;" controls loop preload="none" loading="lazy">
         </div>
     {% else %}
-        <img src="/img/{{ board.board }}/{{ tim }}{{ ext }}" height="250px" />
+        <img src="/static/{{ board.board }}/{{ tim }}{{ ext }}" height="250px" />
     {% endif %}
 {% endmacro %}
 
