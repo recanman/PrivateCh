@@ -1,5 +1,5 @@
 // made by recanman
-const MATCH_REPLIES_REGEX=new RegExp(/(?<=&gt;&gt;)\d+/gm)
+const MATCH_REPLIES_REGEX=new RegExp(/(?<=&gt;&gt;)\d+/g)
 
 const TTLCache = require("@isaacs/ttlcache")
 const cache = new TTLCache({max: 100, ttl: 15 * 1000})
@@ -43,27 +43,37 @@ const SortThreads = threads => {
 const OrganizeRepliesForThread = posts => {
     let replies = {}
     let thread = posts
+    let mentions = {}
 
+    let index = -1
     for (const post of posts) {
-        const matchedReplies = MATCH_REPLIES_REGEX.exec(post.com)
+        index += 1
+        if (!post.com) {continue}
+        const matchedReplies = post.com.match(MATCH_REPLIES_REGEX)
         if (!matchedReplies) {continue}
+        mentions[post.no] = matchedReplies
 
-        if (!replies[matchedReplies[0]]) {
-            replies[matchedReplies[0]] = []
+        for (const replyNo of matchedReplies) {
+            if (replyNo == post.resto) {
+                const replaceReplyRegex = new RegExp(`(?<=&gt;&gt;)${post.resto}`, "g")
+                thread[index].com = post.com.replace(replaceReplyRegex, `${post.resto} (OP)`)
+            }
+
+            if (!replies[replyNo]) {
+                replies[replyNo] = [post.no]
+            } else {
+                replies[replyNo].push(post.no)
+            }
         }
-
-        replies[matchedReplies[0]].push(post.no)
     }
 
-    let index = 0
+    index = 0
     for (const postReply of thread) {
         const postReplies = replies[postReply.no]
-        if (!postReplies) {
-            index += 1
-            continue
-        }
+        const postMentions = mentions[postReply.no]
 
         thread[index].replies = postReplies
+        thread[index].mentions = postMentions
         index += 1
     }
 

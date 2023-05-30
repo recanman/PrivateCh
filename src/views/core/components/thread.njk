@@ -6,15 +6,12 @@
 
         <div class="post-header">
             {% if reply.sub %}<b>{{ reply.sub }}</b>&nbsp;{% endif %}<b style="color:green">{{ reply.name }}</b>&nbsp;<span>{{ reply.time | formatDate }}</span>&nbsp;<span>No. {{ reply.no }}</span>
-        
             {% for postReplyNo in reply.replies %}
                 <a href="#p{{ postReplyNo }}" class="quotelink">&gt;&gt;{{ postReplyNo }}</a>
             {% endfor %}
         </div>
-        
-        <p>{{ reply.com }}</p>
 
-        
+        <p>{{ reply.com }}</p>
     </div>
 {% endmacro %}
 
