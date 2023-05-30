@@ -1,7 +1,22 @@
+{% macro media(tim, ext) %}
+    {% if ext == ".webm" %}
+        <input type="checkbox" class="toggle-checkbox" id="media-{{ tim }}" />
+        <label for="media-{{ tim }}" class="toggle-label">
+            <img src="/img/{{ board.board }}/{{ tim }}s.jpg" height="125px" />
+        </label>
+
+        <div class="toggle-container">
+            <video src="/img/{{ board.board }}/{{ tim }}{{ ext }}" style="width: 1088px; height: 544px;" controls loop preload="none" loading="lazy">
+        </div>
+    {% else %}
+        <img src="/img/{{ board.board }}/{{ tim }}{{ ext }}" height="250px" />
+    {% endif %}
+{% endmacro %}
+
 {% macro reply(reply) %}
     <div class="reply" id="p{{ reply.no }}">
         {% if reply.filename %}
-            <img src="/img/{{ board.board }}/{{ reply.tim }}{{ reply.ext }}" height="250px" />
+            {{ media(reply.tim, reply.ext )}}
         {% endif %}
 
         <div class="post-header">
@@ -18,7 +33,7 @@
 {% macro thread(thread, showLink=true) %}
     <div class="thread" id="p{{ thread.no }}">
         {% if thread.filename %}
-            <img src="/img/{{ board.board }}/{{ thread.tim }}{{ thread.ext }}" height="250px" />
+            {{ media(thread.tim, thread.ext )}}
         {% endif %}
 
         <div class="post-header">

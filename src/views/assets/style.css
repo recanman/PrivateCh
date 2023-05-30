@@ -37,3 +37,24 @@ body {
     font-size: 11px;
     margin-left: 4px;
 }
+
+.toggle-checkbox {
+    opacity: 0;
+}
+
+.toggle-label {
+    -webkit-appearance: push-button;
+    -moz-appearance: button;
+    appearance: button;
+    display: inline-block;
+    margin: 60px 0 10px 0;
+    cursor: pointer;
+}
+ 
+.toggle-container {
+    display: none;
+}
+ 
+.toggle-checkbox:checked ~ .toggle-container {
+    display: block;
+}
