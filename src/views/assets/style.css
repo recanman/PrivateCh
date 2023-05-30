@@ -38,6 +38,10 @@ body {
     margin-left: 4px;
 }
 
+.post-header .name {
+    color: green;
+}
+
 .toggle-checkbox {
     opacity: 0;
 }

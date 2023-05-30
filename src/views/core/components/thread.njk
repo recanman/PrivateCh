@@ -13,19 +13,22 @@
     {% endif %}
 {% endmacro %}
 
+{% macro postHeader(post) %}
+     <div class="post-header">
+        {% if post.sub %}<b class="name">{{ post.sub }}</b>&nbsp;{% endif %}<b class="name">{{ post.name }}</b>{% if post.trip %}&nbsp;<span class="name">{{ post.trip }}</span>{% endif %}&nbsp;<span>{{ post.time | formatDate }}</span>&nbsp;<span>No. {{ post.no }}</span>
+        {% for postReplyNo in post.replies %}
+            <a href="#p{{ postReplyNo }}" class="quotelink">&gt;&gt;{{ postReplyNo }}</a>
+        {% endfor %}
+    </div>    
+{% endmacro %}
+
 {% macro reply(reply) %}
     <div class="reply" id="p{{ reply.no }}">
         {% if reply.filename %}
             {{ media(reply.tim, reply.ext )}}
         {% endif %}
 
-        <div class="post-header">
-            {% if reply.sub %}<b>{{ reply.sub }}</b>&nbsp;{% endif %}<b style="color:green">{{ reply.name }}</b>&nbsp;<span>{{ reply.time | formatDate }}</span>&nbsp;<span>No. {{ reply.no }}</span>
-            {% for postReplyNo in reply.replies %}
-                <a href="#p{{ postReplyNo }}" class="quotelink">&gt;&gt;{{ postReplyNo }}</a>
-            {% endfor %}
-        </div>
-
+        {{ postHeader(reply) }}
         <p>{{ reply.com }}</p>
     </div>
 {% endmacro %}
@@ -36,14 +39,7 @@
             {{ media(thread.tim, thread.ext )}}
         {% endif %}
 
-        <div class="post-header">
-            {% if thread.sub %}<b>{{ thread.sub }}</b>&nbsp;{% endif %}<b style="color:green">{{ thread.name }}</b>&nbsp;<span>{{ thread.time | formatDate }}</span>&nbsp;<span>No. {{ thread.no }}</span>
-        
-            {% for postReplyNo in thread.replies %}
-                <a href="#p{{ postReplyNo }}" class="quotelink">&gt;&gt;{{ postReplyNo }}</a>
-            {% endfor %}
-        </div>
-
+        {{ postHeader(thread) }}
         <p>{{ thread.com }}</p>
 
         {% if showLink == true %}
