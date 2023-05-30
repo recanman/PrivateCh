@@ -13,9 +13,17 @@
     {% endif %}
 {% endmacro %}
 
+{% macro getFlag(post) %}
+    {% if post.country_name %}
+        &nbsp;<img class="flag flag-{{ post.country.toLowerCase() }}" title="{{ post.country_name }}" />
+    {% elseif post.board_flag %}
+        &nbsp;<img class="bfl bfl-{{ post.board_flag.toLowerCase() }}" title="{{ post.flag_name }}" />
+    {% endif %}
+{% endmacro %}
+
 {% macro postHeader(post) %}
      <div class="post-header">
-        {% if post.sub %}<b class="name">{{ post.sub }}</b>&nbsp;{% endif %}<b class="name">{{ post.name }}</b>{% if post.trip %}&nbsp;<span class="name">{{ post.trip }}</span>{% endif %}&nbsp;<span>{{ post.time | formatDate }}</span>&nbsp;<span>No. {{ post.no }}</span>
+        {% if post.sub %}<b class="name">{{ post.sub }}</b>&nbsp;{% endif %}<b class="name">{{ post.name }}</b>{% if post.trip %}&nbsp;<span class="name">{{ post.trip }}</span>{% endif %}{% if post.since4pass %}&nbsp;<img src="/static/asset/image/minileaf.gif" title="Pass user since {{ post.since4pass }}" />{% endif %}{{ getFlag(post) }}&nbsp;<span>{{ post.time | formatDate }}</span>&nbsp;<span>No. {{ post.no }}</span>
         {% for postReplyNo in post.replies %}
             <a href="#p{{ postReplyNo }}" class="quotelink">&gt;&gt;{{ postReplyNo }}</a>
         {% endfor %}

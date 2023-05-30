@@ -2,6 +2,16 @@
 {% extends "core/layout.njk" %}
 {% from "core/components/thread.njk" import thread with context %}
 
+{% block includes %}
+    {% if board.country_flags %}
+        <link rel="stylesheet" href="/static/asset/css/flags.css" />
+    {% endif %}
+    
+    {% if board.board_flags %}
+        <link rel="stylesheet" href="/static/asset/image/flags/{{ board.board }}/flags.css" />
+    {% endif %}
+{% endblock %}
+
 {% block body %}
 {{ super() }}
 
