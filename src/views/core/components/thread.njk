@@ -1,15 +1,15 @@
-{% macro media(tim, ext) %}
-    {% if ext == ".webm" %}
-        <input type="checkbox" class="toggle-checkbox" id="media-{{ tim }}" />
-        <label for="media-{{ tim }}" class="toggle-label">
-            <img src="/static/{{ board.board }}/{{ tim }}s.jpg" height="125px" />
+{% macro media(post) %}
+    {% if post.ext == ".webm" %}
+        <input type="checkbox" class="toggle-checkbox" id="media-{{ post.tim }}" />
+        <label for="media-{{ post.tim }}" class="toggle-label">
+            <img src="/static/{{ board.board }}/{{ post.tim }}s.jpg" height="{{ post.tn_h }}px" width="{{ post.tn_w }}px" />
         </label>
 
         <div class="toggle-container">
-            <video src="/static/{{ board.board }}/{{ tim }}{{ ext }}" style="width: 1088px; height: 544px;" controls loop preload="none" loading="lazy">
+            <video src="/static/{{ board.board }}/{{ post.tim }}{{ post.ext }}" style="width: {{ post.w }}px; height: {{ post.h }}px;" controls loop preload="none" loading="lazy">
         </div>
     {% else %}
-        <img src="/static/{{ board.board }}/{{ tim }}{{ ext }}" height="250px" />
+        <img src="/static/{{ board.board }}/{{ post.tim }}{{ post.ext }}" height="{{ post.tn_h }}" width="{{ post.tn_w }}" />
     {% endif %}
 {% endmacro %}
 
@@ -25,7 +25,7 @@
 {% macro reply(reply) %}
     <div class="reply" id="p{{ reply.no }}">
         {% if reply.filename %}
-            {{ media(reply.tim, reply.ext )}}
+            {{ media(reply) }}
         {% endif %}
 
         {{ postHeader(reply) }}
@@ -36,7 +36,7 @@
 {% macro thread(thread, showLink=true) %}
     <div class="thread" id="p{{ thread.no }}">
         {% if thread.filename %}
-            {{ media(thread.tim, thread.ext )}}
+            {{ media(thread) }}
         {% endif %}
 
         {{ postHeader(thread) }}
