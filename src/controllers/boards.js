@@ -1,5 +1,6 @@
 // made by recanman
 const MATCH_REPLIES_REGEX=new RegExp(/(?<=&gt;&gt;)\d+/g)
+const MATCH_REPLY_LINK_REGEX=new RegExp(/"#p\d+"/, "g")
 
 const TTLCache = require("@isaacs/ttlcache")
 const cache = new TTLCache({max: 100, ttl: 15 * 1000})
@@ -16,7 +17,7 @@ const SortByTimestamp = (object, field, reverse = false) => {
     })
 }
 
-const SortThreads = threads => {
+const SortThreads = (threads, board_code) => {
     threads = SortByTimestamp(threads, "last_modified")
 
     threads = threads.sort((a, b) => {
@@ -33,6 +34,29 @@ const SortThreads = threads => {
     for (const thread of threads) {
         if (!thread.last_replies) {continue}
         threads[index].last_replies = SortByTimestamp(thread.last_replies, "time")
+
+        let replyIndex = -1
+        for (const reply of threads[index].last_replies) {
+            replyIndex += 1
+            if (!reply.com) {continue}
+
+            const linkMatches = reply.com.match(MATCH_REPLY_LINK_REGEX)
+            if (!linkMatches) {continue}
+
+            let newReplyCom = reply.com.replace(MATCH_REPLY_LINK_REGEX, val => {
+                return `"/${board_code}/thread/${thread.no}${val.replace('"', "")}"`
+            })
+
+            threads[index].last_replies[replyIndex].com = newReplyCom
+
+            for (const linkMatch of linkMatches) {
+                if (!parseInt(linkMatch.substring(2)) == thread.no) {continue}
+
+                const replaceReplyRegex = new RegExp(`(?<=&gt;&gt;)${thread.no}`, "g")
+                newReplyCom = reply.com.replace(replaceReplyRegex, `${thread.no} (OP)`)
+                threads[index].last_replies[replyIndex].com = newReplyCom
+            }
+        }
 
         index += 1
     }
@@ -92,7 +116,7 @@ const GetThreadsForBoard = async (board_code, page = 1) => {
                 return reject()
             }
 
-            return resolve(SortThreads(pageInfo.threads))
+            return resolve(SortThreads(pageInfo.threads, board_code))
         }
 
         fetch(`${process.env.API_BASE_URL}${board_code}/${process.env.API_CATALOG_ENDPOINT}`).then(result => {
@@ -103,7 +127,7 @@ const GetThreadsForBoard = async (board_code, page = 1) => {
                 }
 
                 cache.set(cacheKey, json)
-                resolve(SortThreads(pageInfo.threads))
+                resolve(SortThreads(pageInfo.threads, board_code))
             }).catch(reject)
         }).catch(reject)
     })
