@@ -57,7 +57,11 @@
         <p>{{ thread.com }}</p>
 
         {% if showLink == true %}
-            <span style="color:grey">{{ thread.omitted_posts }} replies and {{ thread.omitted_images }} images omitted. <a href="/{{ board.board }}/thread/{{ thread.no }}">Click here</a> to view.</span>
+            {% if thread.omitted_posts %}
+                <span style="color:grey">{{ thread.omitted_posts }} replies and {{ thread.omitted_images }} images omitted. <a href="/{{ board.board }}/thread/{{ thread.no }}">Click here</a> to view.</span>
+            {% else %}
+                <span style="color:grey"><a href="/{{ board.board }}/thread/{{ thread.no }}">Click here</a> to view.</span>
+            {% endif %}
         {% endif %}
 
         {% for last_reply in thread.last_replies %}
