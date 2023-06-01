@@ -1,5 +1,5 @@
-{% macro media(post) %}
-    <input type="checkbox" class="toggle-checkbox" id="media-{{ post.tim }}" />
+{% macro media(post, dontRecursePreviews = false) %}
+    <input type="checkbox" class="toggle-checkbox" {% if not dontRecursePreviews %} id="media-{{ post.tim }}" {%endif%} />
     <label for="media-{{ post.tim }}" class="toggle-label">
 
     {% if post.ext == ".webm" %}
@@ -57,7 +57,7 @@
         <p>{{ thread.com }}</p>
 
         {% if showLink == true %}
-            <a href="/{{ board.board }}/thread/{{ thread.no }}">Click to view</a>
+            <span style="color:grey">{{ thread.omitted_posts }} replies and {{ thread.omitted_images }} images omitted. <a href="/{{ board.board }}/thread/{{ thread.no }}">Click here</a> to view.</span>
         {% endif %}
 
         {% for last_reply in thread.last_replies %}
