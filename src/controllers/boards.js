@@ -49,13 +49,9 @@ const SortThreads = (threads, board_code) => {
 
             threads[index].last_replies[replyIndex].com = newReplyCom
 
-            for (const linkMatch of linkMatches) {
-                if (!parseInt(linkMatch.substring(2)) == thread.no) {continue}
-
-                const replaceReplyRegex = new RegExp(`(?<=&gt;&gt;)${thread.no}`, "g")
-                newReplyCom = reply.com.replace(replaceReplyRegex, `${thread.no} (OP)`)
-                threads[index].last_replies[replyIndex].com = newReplyCom
-            }
+            const replaceReplyRegex = new RegExp(`(?<=&gt;&gt;)${thread.no}`, "g")
+            newReplyCom = reply.com.replace(replaceReplyRegex, `${thread.no} (OP)`)
+            threads[index].last_replies[replyIndex].com = newReplyCom
         }
 
         index += 1
@@ -77,12 +73,10 @@ const OrganizeRepliesForThread = posts => {
         if (!matchedReplies) {continue}
         mentions[post.no] = matchedReplies
 
-        for (const replyNo of matchedReplies) {
-            if (replyNo == post.resto) {
-                const replaceReplyRegex = new RegExp(`(?<=&gt;&gt;)${post.resto}`, "g")
-                thread[index].com = post.com.replace(replaceReplyRegex, `${post.resto} (OP)`)
-            }
+        const replaceReplyRegex = new RegExp(`(?<=&gt;&gt;)${post.resto}`, "g")
+        thread[index].com = post.com.replace(replaceReplyRegex, `${post.resto} (OP)`)
 
+        for (const replyNo of matchedReplies) {
             thread[index].com = post.com.replace(MATCH_REPLY_LINK_REGEX, val => {
                 return `${val} id="link-mention-${val.replace("#p", "").replace('"', "")}"`
             })
