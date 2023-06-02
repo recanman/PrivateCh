@@ -83,6 +83,10 @@ const OrganizeRepliesForThread = posts => {
                 thread[index].com = post.com.replace(replaceReplyRegex, `${post.resto} (OP)`)
             }
 
+            thread[index].com = post.com.replace(MATCH_REPLY_LINK_REGEX, val => {
+                return `${val} id="link-mention-${val.replace("#p", "").replace('"', "")}"`
+            })
+
             if (!replies[replyNo]) {
                 replies[replyNo] = [post.no]
             } else {

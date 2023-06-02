@@ -27,23 +27,49 @@
     {% endif %}
 {% endmacro %}
 
-{% macro postHeader(post) %}
+{% macro postHeader(post, dontRecursePreviews = false) %}
      <div class="post-header">
         {% if post.sub %}<b class="name">{{ post.sub }}</b>&nbsp;{% endif %}<b class="name">{{ post.name }}</b>{% if post.trip %}&nbsp;<span class="name">{{ post.trip }}</span>{% endif %}{% if post.since4pass %}&nbsp;<img src="/static/asset/image/minileaf.gif" title="Pass user since {{ post.since4pass }}" />{% endif %}{{ getFlag(post) }}&nbsp;<span>{{ post.time | formatDate }}</span>&nbsp;<span>No. {{ post.no }}</span>
         {% for postReplyNo in post.replies %}
-            <a href="#p{{ postReplyNo }}" class="quotelink">&gt;&gt;{{ postReplyNo }}</a>
+            <a {% if not dontRecursePreviews %} id="link-{{ postReplyNo }}" {% endif %} href="#p{{ postReplyNo }}" class="quotelink">&gt;&gt;{{ postReplyNo }}</a>
+
+            {% if not dontRecursePreviews %}
+                {% if posts %}
+                    {% for postInfo in posts %}
+                        {% if postInfo.no == postReplyNo %}
+                            <div id="preview-{{ postReplyNo }}" style="position: absolute; z-index: 100; margin-top: 5px; left: 300px;">{{ reply(postInfo, true) }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
         {% endfor %}
     </div>    
 {% endmacro %}
 
-{% macro reply(reply) %}
-    <div class="reply" id="p{{ reply.no }}">
+{% macro getPreviews(post) %}
+    {% for postMentionNo in post.mentions %}
+            {% if not dontRecursePreviews %}
+                {% if posts %}
+                    {% for postInfo in posts %}
+                        {% if postInfo.no == postMentionNo %}
+                            <div id="preview-mention-{{ postMentionNo }}" style="position: absolute; z-index: 100; margin-top: 5px; left: 300px;">{{ reply(postInfo, true) }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+{% endmacro %}
+
+{% macro reply(reply, dontRecursePreviews = false) %}
+    <div class="reply" {% if not dontRecursePreviews %} id="p{{ reply.no }}" {% endif %}>
         {% if reply.filename %}
-            {{ media(reply) }}
+            {{ media(reply, dontRecursePreviews) }}
         {% endif %}
 
-        {{ postHeader(reply) }}
-        <p>{{ reply.com }}</p>
+        {{ postHeader(reply, dontRecursePreviews) }}
+        <p>
+            {{ reply.com }} {{ getPreviews(reply) }}
+        </p>
     </div>
 {% endmacro %}
 
@@ -58,7 +84,7 @@
 
         {% if showLink == true %}
             {% if thread.omitted_posts %}
-                <span style="color:grey">{{ thread.omitted_posts }} replies and {{ thread.omitted_images }} images omitted. <a href="/{{ board.board }}/thread/{{ thread.no }}">Click here</a> to view.</span>
+            <span style="color:grey">{{ thread.omitted_posts }} replies and {{ thread.omitted_images }} images omitted. <a href="/{{ board.board }}/thread/{{ thread.no }}">Click here</a> to view.</span>
             {% else %}
                 <span style="color:grey"><a href="/{{ board.board }}/thread/{{ thread.no }}">Click here</a> to view.</span>
             {% endif %}

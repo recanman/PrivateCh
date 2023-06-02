@@ -10,6 +10,30 @@
     {% if board.board_flags %}
         <link rel="stylesheet" href="/static/asset/image/flags/{{ board.board }}/flags.css" />
     {% endif %}
+
+    <style>
+        {% for replyInfo in posts %}
+            {% for postReplyNo in replyInfo.replies %}
+                    #link-{{ postReplyNo }}:hover + #preview-{{ postReplyNo }} {
+                        display: block;
+                    }
+
+                    #preview-{{ postReplyNo }} {
+                        display: none;
+                    }
+            {% endfor %}
+
+            {% for postMentionNo in replyInfo.mentions %}
+                    #link-mention-{{ postMentionNo }}:hover + #preview-mention-{{ postMentionNo }} {
+                        display: block;
+                    }
+
+                    #preview-mention-{{ postMentionNo }} {
+                        display: none;
+                    }
+            {% endfor %}
+        {% endfor %}
+    </style>
 {% endblock %}
 
 {% block body %}
