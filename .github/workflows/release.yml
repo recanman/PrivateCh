@@ -25,7 +25,7 @@ jobs:
       - name: Create tag
         uses: EndBug/latest-tag@latest
         with:
-          tag: ${{ steps.semver.outputs.next }}
+          ref: ${{ steps.semver.outputs.next }}
 
       - name: Generate changelog
         id: changelog
