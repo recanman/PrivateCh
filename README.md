@@ -77,15 +77,6 @@ You can read more here: (todo)-->
 
 See [CONTRIBUTING.md](./CONTRIUBTING.md).
 
-### Code
-
-1.  Fork it ( https://github.com/recanman/privacychan/fork ).
-1.  Create your feature branch (`git checkout -b my-new-feature`).
-1.  Stage your files (`git add .`).
-1.  Commit your changes (`git commit -am 'Add some feature'`).
-1.  Push to the branch (`git push origin my-new-feature`).
-1.  Create a new pull request ( https://github.com/recanman/privacychan/compare ).
-
 ## Liability
 
 We take no responsibility for the use of our tool, or external instances
