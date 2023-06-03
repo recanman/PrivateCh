@@ -24,6 +24,13 @@ body {
     border: 1px solid #ba9dbf;
 }
 
+.thread label, .reply label {
+    clear: both;
+    float: left;
+    margin-right: 10px;
+    margin-top: 25px;
+}
+
 .quote {
     color: #789922;
 }
