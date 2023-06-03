@@ -4,20 +4,20 @@ const {boardCodes, boardList} = require("../helpers/getBoards").GetBoards()
 module.exports = (req, res, next) => {
     let {board_code, index} = req.params
     if (!index) {
-        return res.sendStatus(400)
+        throw new Error("Page number is required.")
     }
 
     if (!boardCodes[board_code]) {
-        res.sendStatus(400)
+        throw new Error("Board does not exist.")
     } else {
         index = parseInt(index)
 
         if (isNaN(index)) {
-            return res.sendStatus(400)
+            throw new Error("Page number must be an integer.")
         } else if (index <= 0) {
-            return res.sendStatus(400)
+            throw new Error("Page number must be bigger than 0.")
         } else if (index > boardList[board_code].pages) {
-            return res.sendStatus(400)
+            throw new Error(`Page number too high. Maximum is ${boardList[board_code].pages}.`)
         } else {
             next()
         }
