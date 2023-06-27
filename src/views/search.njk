@@ -1,0 +1,27 @@
+{% set title = "Search All Boards" %}
+{% extends "core/layout.njk" %}
+{% from "core/components/thread.njk" import thread with context %}
+
+{% block body %}
+{{ super() }}
+
+<h1>Search All Boards</h1>
+
+<form action="/search" method="post">
+    <input type="text" name="query" placeholder="Search!" value="{{ search.query }}" required />
+    <input type="submit" value="Search" />
+</form>
+
+{% if search %}
+    {% if search.count == 0 %}
+        <p>No results found.</p>
+    {% endif %}
+
+    <div>
+        {% for threadInfo in search.threads %}
+            {{ thread(threadInfo) }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock %}

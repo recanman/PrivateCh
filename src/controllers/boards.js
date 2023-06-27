@@ -153,7 +153,26 @@ const GetThreadForBoard = async (board_code, thread_id) => {
     })
 }
 
+const Search = async (query, board_code) => {
+    return new Promise((resolve, reject) => {
+        fetch(`${process.env.P4_API_BASE_URL}search?` + new URLSearchParams({
+            q: query,
+            b: board_code
+        }), {
+            headers: {
+                "X-Requested-With": "p4 f"
+            }
+        }).then(result => {
+            result.json().then(json => {
+                if (json.errors) {resolve({})}
+                resolve(json)
+            }).catch(reject)
+        }).catch(reject)
+    })
+}
+
 module.exports = {
     GetThreadsForBoard,
-    GetThreadForBoard
+    GetThreadForBoard,
+    Search
 }
