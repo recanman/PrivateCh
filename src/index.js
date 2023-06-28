@@ -53,7 +53,8 @@ const routeFiles = readdirSync("src/routes").filter(file => {
     return extname(file).toLowerCase() == ".js"
 })
 
-require("./helpers/getBoards").RunGetBoards().then(() => {
+const getBoards = require("./helpers/getBoards")
+getBoards.RunGetBoards().then(() => {
     routeFiles.forEach(file => {
         const splitName = file.split(".")
         const routeName = splitName[0]
@@ -63,6 +64,19 @@ require("./helpers/getBoards").RunGetBoards().then(() => {
         app.use(`/${routeName}`, require(`./routes/${routeName}`))
         console.log("\tDone.")
     })
+
+    const {boards} = getBoards.GetBoards()
+    app.use((req, res, next) => {
+        const render = res.render
+
+        res.render = (view, options, callback) => {
+            options.boardList = boards
+            render.call(res, view, options, callback)
+        }
+
+        next()
+    })
+    
     
     console.log("Loading main route...")
     app.use("/", require("./routes/main"))

@@ -15,6 +15,18 @@
         <div class="container">
             <div id="alerts"></div>
 
+            {% if not no_top_bar %}
+                <div>
+                    {% for _, category in boardList %}
+                    [
+                        {% for board in category %}
+                            <a href="/{{ board.board }}/">{{ board.board }}</a>
+                        {% endfor %}
+                    ]
+                    {% endfor %}
+                </div>
+            {% endif %}
+
             {% block body %}
             {% endblock %}
         </div>
