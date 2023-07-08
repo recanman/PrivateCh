@@ -10,19 +10,17 @@
     <b>Boards</b>
 
     <ul>
-        {% for categoryName, category in boards %}
+        {% for categoryName, category in boardList %}
             <li>
-                <u>{{ categoryName }}</u>
-                
-                {% if category.nsfw %}
-                    (<b style="color:red">NSFW</b>)
-                {% endif %}
-                
+                <u>{{ categoryName }}</u>          
             </li>
 
             <ul>
                 {% for board in category %}
                     <a href="/{{ board.board }}/">{{ board.title }}</a>
+                    {% if boards[board.board].ws_board == 0 %}
+                        (<b style="color:red">NSFW</b>)
+                     {% endif %}
                     <br>
                 {% endfor %}
             </ul>

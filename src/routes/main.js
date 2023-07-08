@@ -8,7 +8,7 @@ const CheckPage = require("../middlewares/checkPage")
 
 const BoardsController = require("../controllers/boards")
 
-router.get("/", (req, res) => res.render("index", {boards: boards}))
+router.get("/", (req, res) => res.render("index", {boards: boardList}))
 
 router.get("/:board_code/", CheckBoard, async (req, res, next) => {
     const {board_code} = req.params
