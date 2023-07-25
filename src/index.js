@@ -44,6 +44,10 @@ nunjucksEnv.addFilter("split", (string, separator) => {
     return string[0].split(separator)
 })
 
+nunjucksEnv.addFilter("json", (string) => {
+    return JSON.stringify(string)
+})
+
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 

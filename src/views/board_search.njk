@@ -1,0 +1,38 @@
+{% set title = ["/", board.board, "/"] | join %}
+{% extends "core/layout.njk" %}
+{% from "core/components/thread.njk" import thread with context %}
+
+{% block includes %}
+    {% if board.country_flags %}
+        <link rel="stylesheet" href="/static/asset/css/flags.css" />
+    {% endif %}
+    
+    {% if board.board_flags %}
+        <link rel="stylesheet" href="/static/asset/image/flags/{{ board.board }}/flags.css" />
+    {% endif %}
+
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
+<h1>/{{ board.board }}/ - {{ board.title }}</h1>
+
+<form action="/{{ board.board }}/search" method="post">
+    <input type="text" name="query" placeholder="Search!" value="{{ search.query }}" required />
+    <input type="submit" value="Search" />
+</form>
+
+{% if search %}
+    {% if search.count == 0 %}
+        <p>No results found.</p>
+    {% endif %}
+
+    <div>
+        {% for threadInfo in search.threads %}
+            {{ thread(threadInfo) }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock %}
